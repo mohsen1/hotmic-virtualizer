@@ -1,6 +1,6 @@
 # API Documentation
 
-Complete API reference for Sonic Rings Visualizer.
+Complete API reference for Hotmic Virtualizer.
 
 ## Table of Contents
 

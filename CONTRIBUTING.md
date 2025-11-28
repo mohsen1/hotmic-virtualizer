@@ -1,4 +1,4 @@
-# Contributing to Sonic Rings Visualizer
+# Contributing to Hotmic Virtualizer
 
 Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to the project.
 

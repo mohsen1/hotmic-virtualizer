@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-11-28
 
 ### Added
-- Initial release of Sonic Rings Visualizer
+- Initial release of Hotmic Virtualizer
 - Real-time microphone audio visualization with WebGL
 - Concentric time-delayed waveform rings
 - Configurable visualization parameters

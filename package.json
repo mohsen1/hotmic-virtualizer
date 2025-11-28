@@ -39,7 +39,7 @@
     "audio-visualizer",
     "waveform",
     "frequency",
-    "sonic"
+    "hotmic"
   ],
   "author": "Mohsen Azimi",
   "license": "MIT",

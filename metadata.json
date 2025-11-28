@@ -1,5 +1,5 @@
 {
-  "name": "Sonic Rings Visualizer",
+  "name": "Hotmic Virtualizer",
   "description": "A high-fidelity WebGL microphone visualization using concentric time-delayed waveforms.",
   "requestFramePermissions": [
     "microphone"
