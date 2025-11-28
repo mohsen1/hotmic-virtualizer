@@ -18,7 +18,7 @@ A high-fidelity WebGL microphone visualization library using concentric time-del
 
 ## Demo
 
-[View Live Demo](https://mohsenazimi.github.io/hotmic-virtualizer)
+[View Live Demo](https://mohsen1.github.io/hotmic-virtualizer)
 
 ## Installation
 
