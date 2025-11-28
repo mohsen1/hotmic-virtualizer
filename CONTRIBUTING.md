@@ -13,7 +13,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/yourusername/hotmic-virtualizer.git
+   git clone https://github.com/mohsen1/hotmic-virtualizer.git
    cd hotmic-virtualizer
    ```
 
