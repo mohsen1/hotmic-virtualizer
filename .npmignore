@@ -1,0 +1,36 @@
+# Development files
+*.log
+*.map
+.env.local
+.DS_Store
+
+# Source files
+src/
+components/
+hooks/
+tests/
+*.tsx
+*.ts
+!*.d.ts
+
+# Build configs
+tsconfig*.json
+vite.config*.ts
+vitest.config.ts
+
+# Demo files
+demo/
+App.tsx
+index.html
+index.tsx
+metadata.json
+
+# Github
+.github/
+.gitignore
+
+# Documentation source (keep only built docs)
+docs/
+
+# Various
+*.tgz
