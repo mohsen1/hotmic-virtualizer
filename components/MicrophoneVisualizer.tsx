@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Mic, MicOff } from 'lucide-react';
+import { Mic } from 'lucide-react';
 import { useAudioAnalysis } from '../hooks/useAudioAnalysis';
 import { VisualizerScene } from './VisualizerScene';
-import { VisualizerConfig, AudioStats, Theme } from '../types';
+import { VisualizerConfig, AudioStats } from '../types';
 
 interface MicrophoneVisualizerProps {
   config: VisualizerConfig;
   setStats?: (stats: AudioStats) => void;
-  theme: Theme;
-  micColorLight?: string; // Hex color for light mode
-  micColorDark?: string;  // Hex color for dark mode
+  /** Optional: custom icon to show in center. Defaults to Mic icon. Pass null to hide. */
+  icon?: React.ReactNode | null;
+  /** Icon color. Defaults to white */
+  iconColor?: string;
+  /** Icon size as percentage of container (0-100). Defaults to 40 */
+  iconSize?: number;
 }
 
 // Component to bridge the hook update loop with the render loop
@@ -28,12 +31,30 @@ const AudioUpdater = ({ update, statsRef, setStats }: {
     return null;
 }
 
+/**
+ * MicrophoneVisualizer - A WebGL audio visualizer that automatically starts listening
+ * 
+ * Renders the visualization canvas filling its container. Optionally shows a centered icon.
+ * Automatically starts capturing audio when mounted and stops when unmounted.
+ * 
+ * @example
+ * // Basic usage - just the visualization
+ * <div className="w-20 h-20">
+ *   <MicrophoneVisualizer config={config} icon={null} />
+ * </div>
+ * 
+ * @example
+ * // With centered icon
+ * <button className="relative w-12 h-12 rounded-full">
+ *   <MicrophoneVisualizer config={config} icon={<Mic />} iconColor="#fff" />
+ * </button>
+ */
 export const MicrophoneVisualizer: React.FC<MicrophoneVisualizerProps> = ({ 
     config, 
-    setStats, 
-    theme,
-    micColorLight = '#000000',
-    micColorDark = '#ffffff'
+    setStats,
+    icon,
+    iconColor = '#ffffff',
+    iconSize = 40,
 }) => {
   const { 
     isListening, 
@@ -43,81 +64,59 @@ export const MicrophoneVisualizer: React.FC<MicrophoneVisualizerProps> = ({
     statsRef,
     update 
   } = useAudioAnalysis({
-    // Increased to 512 to give 256 frequency bins
-    // This provides better resolution in the lower end (0-500Hz) where voice fundamentals live
     fftSize: 512, 
     smoothingTimeConstant: config.smoothingTimeConstant,
     historySize: config.ringCount,
     waveformSmoothing: config.waveformSmoothing
   });
 
-  const toggleMic = () => {
-    if (isListening) {
+  // Auto-start listening when mounted, stop when unmounted
+  useEffect(() => {
+    startListening();
+    return () => {
       stopListening();
-    } else {
-      startListening();
-    }
-  };
+    };
+  }, [startListening, stopListening]);
 
-  const isDark = theme === 'dark';
-  const activeColor = isDark ? micColorDark : micColorLight;
+  const showIcon = icon !== null && icon !== undefined;
+  const iconElement = icon ?? <Mic style={{ width: '100%', height: '100%', color: iconColor }} />;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      {/* 3D Canvas Layer */}
-      <div className="absolute inset-0 z-0">
-        <Canvas 
-          camera={{ position: [0, 0, 5], fov: 60 }}
-          dpr={[1, 2]} // Handle high DPI screens
-          gl={{ 
-            antialias: true,
-            alpha: true,
+    <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* WebGL Canvas */}
+      <Canvas 
+        camera={{ position: [0, 0, 1.5], fov: 55 }}
+        dpr={[1, 2]}
+        gl={{ 
+          antialias: true,
+          alpha: true,
+        }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+      >
+        {isListening && (
+          <>
+            <AudioUpdater update={update} statsRef={statsRef} setStats={setStats} />
+            <VisualizerScene config={config} frequencyHistoryRef={frequencyHistoryRef} />
+          </>
+        )}
+        <ambientLight intensity={0.5} />
+      </Canvas>
+      
+      {/* Centered Icon Overlay */}
+      {showIcon && (
+        <div 
+          style={{ 
+            position: 'relative',
+            zIndex: 10,
+            pointerEvents: 'none',
+            width: `${iconSize}%`, 
+            height: `${iconSize}%`,
+            color: iconColor,
           }}
         >
-          {isListening && (
-            <>
-               <AudioUpdater update={update} statsRef={statsRef} setStats={setStats} />
-               <VisualizerScene config={config} frequencyHistoryRef={frequencyHistoryRef} />
-            </>
-          )}
-          {/* Ambient light purely for any mesh materials, though we use basic materials mostly */}
-          <ambientLight intensity={0.5} />
-        </Canvas>
-      </div>
-
-      {/* Center Microphone Button */}
-      <div className="z-10 relative group">
-        <button
-          onClick={toggleMic}
-          className={`
-            relative flex items-center justify-center
-            w-16 h-16 rounded-full 
-            transition-all duration-500 ease-out
-            ${isListening 
-              ? 'bg-transparent' // Active: Transparent bg, custom text color
-              : (isDark 
-                  ? 'bg-white/10 text-white/50 hover:bg-white/20 hover:scale-105 hover:text-white' 
-                  : 'bg-black/5 text-black/50 hover:bg-black/10 hover:scale-105 hover:text-black')
-            }
-          `}
-          style={{ color: isListening ? activeColor : undefined }}
-        >
-          {isListening ? (
-            <Mic className="w-6 h-6 z-20" />
-          ) : (
-            <MicOff className="w-6 h-6 z-20" />
-          )}
-        </button>
-        
-        {/* Helper text if not listening */}
-        {!isListening && (
-            <div className={`absolute top-20 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-mono tracking-wider
-                ${isDark ? 'text-white/40' : 'text-black/40'}
-            `}>
-                CLICK TO START
-            </div>
-        )}
-      </div>
+          {iconElement}
+        </div>
+      )}
     </div>
   );
 };
