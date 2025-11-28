@@ -45,12 +45,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mohsenazimi/hotmic-virtualizer.git"
+    "url": "https://github.com/mohsen1/hotmic-virtualizer.git"
   },
   "bugs": {
-    "url": "https://github.com/mohsenazimi/hotmic-virtualizer/issues"
+    "url": "https://github.com/mohsen1/hotmic-virtualizer/issues"
   },
-  "homepage": "https://github.com/mohsenazimi/hotmic-virtualizer#readme",
+  "homepage": "https://github.com/mohsen1/hotmic-virtualizer#readme",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",

@@ -220,6 +220,6 @@ Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for 
 
 ## Support
 
-- 🐛 [Report a Bug](https://github.com/mohsenazimi/hotmic-virtualizer/issues)
-- 💡 [Request a Feature](https://github.com/mohsenazimi/hotmic-virtualizer/issues)
-- 📖 [View Documentation](https://github.com/mohsenazimi/hotmic-virtualizer#readme)
+- 🐛 [Report a Bug](https://github.com/mohsen1/hotmic-virtualizer/issues)
+- 💡 [Request a Feature](https://github.com/mohsen1/hotmic-virtualizer/issues)
+- 📖 [View Documentation](https://github.com/mohsen1/hotmic-virtualizer#readme)

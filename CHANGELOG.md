@@ -36,4 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ES modules and UMD bundle support
 - Tree-shakeable exports
 
-[1.0.0]: https://github.com/mohsenazimi/hotmic-virtualizer/releases/tag/v1.0.0
+[1.0.0]: https://github.com/mohsen1/hotmic-virtualizer/releases/tag/v1.0.0
