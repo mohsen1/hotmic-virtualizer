@@ -36,23 +36,13 @@ const App: React.FC = () => {
       <header className="absolute top-0 left-0 w-full p-6 z-20 flex justify-between items-start pointer-events-none">
         <div>
             <h1 className={`text-2xl font-bold tracking-tighter mb-1 ${isDark ? 'text-white' : 'text-black'}`}>
-                SONIC<span className="text-neutral-500">RINGS</span>
+                HOTMIC<span className="text-neutral-500">VIRTUALIZER</span>
             </h1>
             <p className="text-neutral-500 text-sm max-w-xs">
-                WebGL Audio Latency Visualization. Frequency mapped to polar coordinates with temporal decay.
+                WebGL Audio Visualization. Frequency mapped to polar coordinates with temporal decay.
             </p>
         </div>
       </header>
-
-      {/* Theme Toggle */}
-      <div className="absolute top-6 right-6 z-30">
-        <button 
-          onClick={toggleTheme}
-          className={`p-2 rounded-full transition-colors ${isDark ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-black/5 text-black hover:bg-black/10'}`}
-        >
-           {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-        </button>
-      </div>
 
       {/* Main Visualizer Area */}
       <main className="flex-1 relative overflow-hidden">
@@ -93,6 +83,33 @@ const App: React.FC = () => {
             </div>
             
             <div className="space-y-5">
+                {/* Theme Toggle */}
+                <div className="flex flex-col gap-2">
+                    <label className="text-xs text-neutral-400 font-mono uppercase">Theme</label>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => setTheme('light')}
+                            className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                                theme === 'light' 
+                                    ? 'bg-white text-black' 
+                                    : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
+                            }`}
+                        >
+                            <Sun className="w-4 h-4 inline mr-1" />Light
+                        </button>
+                        <button
+                            onClick={() => setTheme('dark')}
+                            className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                                theme === 'dark' 
+                                    ? 'bg-white text-black' 
+                                    : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
+                            }`}
+                        >
+                            <Moon className="w-4 h-4 inline mr-1" />Dark
+                        </button>
+                    </div>
+                </div>
+
                 {/* Color Picker */}
                 <div className="flex flex-col gap-2">
                     <label className="text-xs text-neutral-400 font-mono uppercase">Emission Color</label>
