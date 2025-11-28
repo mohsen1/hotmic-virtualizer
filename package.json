@@ -1,6 +1,6 @@
 {
   "name": "hotmic-virtualizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A high-fidelity WebGL microphone visualization using concentric time-delayed waveforms",
   "type": "module",
   "main": "./dist/hotmic-virtualizer.umd.js",
@@ -24,57 +24,42 @@
     "build:lib": "vite build --config vite.config.lib.ts",
     "build:demo": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "typecheck": "tsc --noEmit"
+    "prepublishOnly": "npm run build:lib"
   },
-  "keywords": [
-    "audio",
-    "visualization",
-    "microphone",
-    "webgl",
-    "three.js",
-    "react",
-    "audio-visualizer",
-    "waveform",
-    "frequency",
-    "hotmic"
-  ],
-  "author": "Mohsen Azimi",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mohsen1/hotmic-virtualizer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mohsen1/hotmic-virtualizer/issues"
-  },
-  "homepage": "https://github.com/mohsen1/hotmic-virtualizer#readme",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
-    "three": "^0.150.0"
+    "three": ">=0.150.0",
+    "@react-three/fiber": ">=8.0.0"
   },
   "dependencies": {
-    "@react-three/fiber": "^9.4.0",
     "lucide-react": "^0.555.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^16.3.0",
+    "@react-three/fiber": "^9.4.0",
     "@types/node": "^22.14.0",
-    "@types/react": "^19.0.6",
-    "@types/react-dom": "^19.0.3",
-    "@types/three": "^0.181.0",
+    "@types/react": "^19.1.0",
     "@vitejs/plugin-react": "^5.0.0",
-    "@vitest/coverage-v8": "^3.0.0",
-    "happy-dom": "^16.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "three": "^0.181.2",
     "typescript": "~5.8.2",
     "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.0",
-    "vitest": "^3.0.0"
-  }
+    "vite-plugin-dts": "^4.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohsen1/hotmic-virtualizer.git"
+  },
+  "keywords": [
+    "microphone",
+    "visualizer",
+    "webgl",
+    "three.js",
+    "react",
+    "audio",
+    "waveform"
+  ],
+  "author": "Mohsen Azimi",
+  "license": "MIT"
 }
